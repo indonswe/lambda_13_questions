@@ -1,27 +1,33 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 public class Exercises {
 
     private final static DataStorage storage = DataStorage.INSTANCE;
 
+
+
     /*
        1.	Find everyone that has firstName: “Erik” using findMany().
     */
+
     public static void exercise1(String message){
         System.out.println(message);
-        //Write your code here
-
 
 
         List<Person> res = storage.findMany(p->p.getFirstName().equals("Erik"));
 
         System.out.println(res);
-        System.out.println("----------------------");
+
+
     }
 
     /*
@@ -30,8 +36,8 @@ public class Exercises {
     public static void exercise2(String message){
         System.out.println(message);
         //Write your code here
-
-        System.out.println("----------------------");
+        List<Person> res = storage.findMany(p->p.getGender().equals(Gender.FEMALE));
+        System.out.println(res);
     }
 
     /*
@@ -40,7 +46,9 @@ public class Exercises {
     public static void exercise3(String message){
         System.out.println(message);
         //Write your code here
-
+        ChronoLocalDate localD = LocalDate.parse("1999-12-31");
+        List<Person> res = storage.findMany(p->p.getBirthDate().isAfter(localD));
+        System.out.println(res);
         System.out.println("----------------------");
     }
 
@@ -50,7 +58,9 @@ public class Exercises {
     public static void exercise4(String message){
         System.out.println(message);
         //Write your code here
-
+        Person res = storage.findOne(p->p.getId()== 123);
+        System.out.println(res);
+        System.out.println("----------------------");
         System.out.println("----------------------");
 
     }
@@ -62,6 +72,9 @@ public class Exercises {
     public static void exercise5(String message){
         System.out.println(message);
         //Write your code here
+        String res = storage.findOneAndMapToString(p->p.getId()== 456,(person -> "Name: " + person.getFirstName() + " " +
+                person.getLastName() + " born " + person.getBirthDate()));
+        System.out.println(res);
 
         System.out.println("----------------------");
     }
@@ -72,6 +85,9 @@ public class Exercises {
     public static void exercise6(String message){
         System.out.println(message);
         //Write your code here
+        List <String> res = storage.findManyAndMapEachToString(p->p.getFirstName().startsWith("E"),(person -> "Name: " + person.getFirstName() + " " +
+                person.getLastName() + " born " + person.getBirthDate()));
+        System.out.println(res);
 
         System.out.println("----------------------");
     }
@@ -83,7 +99,10 @@ public class Exercises {
     public static void exercise7(String message){
         System.out.println(message);
         //Write your code here
-
+        ChronoLocalDate localD = LocalDate.parse("2011-01-17");
+        List <String> res = storage.findManyAndMapEachToString(p->p.getBirthDate().isAfter(localD),(person -> "Name: " + person.getFirstName() + " " +
+                person.getLastName() + " born " + person.getBirthDate()));
+        System.out.println(res);
         System.out.println("----------------------");
     }
 
@@ -93,6 +112,8 @@ public class Exercises {
     public static void exercise8(String message){
         System.out.println(message);
         //Write your code here
+        storage.findAndDo(p->p.getFirstName().equals("Ulf"),(person -> System.out.println("Name: " + person.getFirstName() + " " +
+                person.getLastName() + " born " + person.getBirthDate())));
 
         System.out.println("----------------------");
     }
@@ -103,7 +124,8 @@ public class Exercises {
     public static void exercise9(String message){
         System.out.println(message);
         //Write your code here
-
+        storage.findAndDo(p->p.getLastName().contains(p.getFirstName()),(person -> System.out.println("Name: " + person.getFirstName() + " " +
+                person.getLastName() + " born " + person.getBirthDate())));
         System.out.println("----------------------");
     }
 
@@ -112,9 +134,13 @@ public class Exercises {
      */
     public static void exercise10(String message){
         System.out.println(message);
+        //StringBuffer sbr = new StringBuffer(str);
+        // To reverse the string
+        //sbr.reverse();
         //Write your code here
-
-        System.out.println("----------------------");
+        /*storage.findAndDo(p->p.getFirstName().equals(reverse(p.getFirstName())),(person -> System.out.println("Name: " + person.getFirstName() + " " +
+                person.getLastName())));
+        System.out.println("----------------------");*/
     }
 
     /*
@@ -123,8 +149,11 @@ public class Exercises {
     public static void exercise11(String message){
         System.out.println(message);
         //Write your code here
+        int i;
+        //List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"),(p1,p2)->p1.getBirthDate().compareTo(p2.getBirthDate()));
+        //= storage.findAndSort(p)
+        List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"), Comparator.comparing(Person::getBirthDate));
 
-        System.out.println("----------------------");
     }
 
     /*
@@ -146,4 +175,5 @@ public class Exercises {
 
         System.out.println("----------------------");
     }
+
 }
