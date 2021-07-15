@@ -1,6 +1,9 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Person;
+
+import java.util.List;
 
 public class Exercises {
 
@@ -13,6 +16,11 @@ public class Exercises {
         System.out.println(message);
         //Write your code here
 
+
+
+        List<Person> res = storage.findMany(p->p.getFirstName().equals("Erik"));
+
+        System.out.println(res);
         System.out.println("----------------------");
     }
 
