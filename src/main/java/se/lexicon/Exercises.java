@@ -4,10 +4,15 @@ import se.lexicon.data.DataStorage;
 import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
+//import javax.annotation.processing.Generated;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.*;
+
+//import static jdk.nashorn.internal.objects.NativeArray.reverse;
 
 public class Exercises {
 
@@ -138,9 +143,13 @@ public class Exercises {
         // To reverse the string
         //sbr.reverse();
         //Write your code here
-        /*storage.findAndDo(p->p.getFirstName().equals(reverse(p.getFirstName())),(person -> System.out.println("Name: " + person.getFirstName() + " " +
+
+
+
+        storage.findAndDo(p->p.getFirstName().toUpperCase().equals((new Reverse(p.getFirstName().toUpperCase()))),
+                (person -> System.out.println("Name: " + person.getFirstName() + " " +
                 person.getLastName())));
-        System.out.println("----------------------");*/
+        System.out.println("----------------------");
     }
 
     /*
@@ -150,10 +159,11 @@ public class Exercises {
         System.out.println(message);
         //Write your code here
         int i;
-        //List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"),(p1,p2)->p1.getBirthDate().compareTo(p2.getBirthDate()));
+         //List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"),(p1,p2)->p1.getBirthDate().compareTo(p2.getBirthDate()));
         //= storage.findAndSort(p)
-        List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"), Comparator.comparing(Person::getBirthDate));
-
+        List <Person> res = storage.findAndSort(p->p.getFirstName().startsWith("A"),
+                Comparator.comparing(Person::getBirthDate));
+        System.out.println(res);
     }
 
     /*
@@ -162,6 +172,9 @@ public class Exercises {
     public static void exercise12(String message){
         System.out.println(message);
         //Write your code here
+        ChronoLocalDate localD = LocalDate.parse("2011-01-17");
+        List <Person> res = storage.findAndSort(p->p.getBirthDate().isBefore(localD),
+                Comparator.comparing(Person::getBirthDate));
 
         System.out.println("----------------------");
     }
@@ -173,7 +186,20 @@ public class Exercises {
         System.out.println(message);
         //Write your code here
 
+        List <Person> res = storage.findAndSort(Comparator.comparing(Person::getBirthDate));
+        System.out.println(res);
+
         System.out.println("----------------------");
     }
 
 }
+
+/*public class Reverse{
+CompType[] a = Generated.array(new CompType[12], CompType.generator());
+print("before sorting:");
+print(Arrays.toString(a));Arrays.sort(a, Collections.reverseOrder());
+print("after sorting:");
+print(Arrays.toString(a));}
+}*/
+
+
