@@ -188,7 +188,11 @@ public class Exercises {
         System.out.println(message);
         //Write your code here
 
-        List <Person> res = storage.findAndSort(Comparator.comparing(Person::getBirthDate));
+        List <Person> res = storage.findAndSort(
+                Comparator.comparing(Person::getLastName).
+                        thenComparing(Person::getFirstName).
+                        thenComparing(Person::getBirthDate));
+
         System.out.println(res);
 
         System.out.println("----------------------");
