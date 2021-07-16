@@ -146,7 +146,8 @@ public class Exercises {
 
 
 
-        storage.findAndDo(p->p.getFirstName().toUpperCase().equals((new Reverse(p.getFirstName().toUpperCase()))),
+        storage.findAndDo(p->p.getFirstName().toUpperCase().equals
+                        ((new Reverse(p.getFirstName()).getStringReverse())),
                 (person -> System.out.println("Name: " + person.getFirstName() + " " +
                 person.getLastName())));
         System.out.println("----------------------");
