@@ -173,9 +173,10 @@ public class Exercises {
     public static void exercise12(String message){
         System.out.println(message);
         //Write your code here
-        ChronoLocalDate localD = LocalDate.parse("2011-01-17");
+        ChronoLocalDate localD = LocalDate.parse("1950-01-01");
         List <Person> res = storage.findAndSort(p->p.getBirthDate().isBefore(localD),
-                Comparator.comparing(Person::getBirthDate));
+                Comparator.comparing(Person::getBirthDate).reversed());
+        System.out.println(res);
 
         System.out.println("----------------------");
     }
