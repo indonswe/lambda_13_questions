@@ -101,10 +101,9 @@ public class Exercises {
     public static void exercise7(String message){
         System.out.println(message);
         //Write your code here
-        ChronoLocalDate localD = LocalDate.parse("2011-01-17");
-        List <String> res = storage.findManyAndMapEachToString(p->p.getBirthDate().isAfter(localD),(person -> "Name: " + person.getFirstName() + " " +
-                person.getLastName() + " born " + person.getBirthDate()));
-        System.out.println(res);
+        List <String> res = storage.findManyAndMapEachToString(p->p.getBirthDate().isAfter(LocalDate.now().minusYears(10)),(person -> "Name: " + person.getFirstName() + " " +
+                person.getLastName() + " " + (LocalDate.now().getYear() - person.getBirthDate().getYear()) + " years"));
+        res.forEach(p-> System.out.println(p));
         System.out.println("----------------------");
     }
 
