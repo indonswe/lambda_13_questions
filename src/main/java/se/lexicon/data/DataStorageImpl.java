@@ -82,7 +82,6 @@ public class DataStorageImpl implements DataStorage {
     public void findAndDo(Predicate<Person> filter, Consumer<Person> consumer){
         for(Person person : personList){
             if(filter.test(person)){
-                System.out.println("added"+ person);
                 consumer.accept(person);
             }
         }

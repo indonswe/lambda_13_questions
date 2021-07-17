@@ -23,13 +23,8 @@ public class Exercises {
 
     public static void exercise1(String message){
         System.out.println(message);
-
-
         List<Person> res = storage.findMany(p->p.getFirstName().equals("Erik"));
-
-        System.out.println(res);
-
-
+        res.forEach(person -> System.out.println(person));
     }
 
     /*
@@ -115,7 +110,6 @@ public class Exercises {
         //Write your code here
         storage.findAndDo(p->p.getFirstName().equals("Ulf"),(person -> System.out.println("Name: " + person.getFirstName() + " " +
                 person.getLastName() + " born " + person.getBirthDate())));
-
         System.out.println("----------------------");
     }
 
@@ -135,10 +129,6 @@ public class Exercises {
      */
     public static void exercise10(String message){
         System.out.println(message);
-
-
-
-
         storage.findAndDo(p->p.getFirstName().toUpperCase().equals
                         ((new Reverse(p.getFirstName()).getStringReverse())),
                 (person -> System.out.println("Name: " + person.getFirstName() + " " +
